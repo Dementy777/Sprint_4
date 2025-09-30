@@ -10,15 +10,17 @@ import ru.yandex.practicum.page.util.EnvConfig;
 import java.time.Duration;
 
 public class StatusPage {
-private final WebDriver driver;
-    private By errorImage = By.cssSelector("img[alt='Not found']");
+    private final WebDriver driver;
+    private final By errorImage = By.cssSelector("img[alt='Not found']");
 
     public StatusPage(WebDriver driver) {
+
         this.driver = driver;
     }
 
     public void checkErrorImage() {
-        new WebDriverWait(driver, Duration.ofSeconds(EnvConfig.EXPLICITY_TIMEOUT)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(errorImage));
+        new WebDriverWait(driver, Duration.ofSeconds(EnvConfig.EXPLICITY_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(errorImage));
         Assert.assertTrue(driver.findElement(errorImage).isDisplayed());
     }
 }

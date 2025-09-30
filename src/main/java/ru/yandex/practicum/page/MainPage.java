@@ -13,51 +13,49 @@ import java.util.List;
 
 public class MainPage {
 
-    //ссылка на драйвер для инициализации пейджы
+    //ссылка на драйвер для инициализации "пейджы"
     private final WebDriver driver;
     private final WebDriverWait wait;
 
     //переменные с локаторами
-    private By orderField=By.cssSelector(".Input_Input__1iN_Z.Header_Input__xIoUq");
-    private By statusButton=By.cssSelector(".Header_Link__1TAG7");
-    private By goButton=By.cssSelector(".Button_Button__ra12g.Header_Button__28dPO");
-    private By cookieButton=By.cssSelector(".App_CookieButton__3cvqF");
+    private final By accordionLocatorQuestions=By.cssSelector("div[id^='accordion__heading-']");
+    private final By accordionLocatorAnswers=By.cssSelector("div[id^='accordion__panel-']");
+    private final By orderField=By.cssSelector(".Input_Input__1iN_Z.Header_Input__xIoUq");
+    private final By statusButton=By.cssSelector(".Header_Link__1TAG7");
+    private final By goButton=By.cssSelector(".Button_Button__ra12g.Header_Button__28dPO");
+    private final By cookieButton=By.cssSelector(".App_CookieButton__3cvqF");
 
-    //локатор для кнопки Заказать сверху страницы
-    private By topOrderButton=By.xpath(".//button[(@class='Button_Button__ra12g' and text()='Заказать')]");
+    //локатор для кнопки "Заказать" сверху страницы
+    private final By topOrderButton=By.xpath(".//div[contains(@class,'Header')]/button[text() = 'Заказать']");
 
-    //локатор для кнопки Заказать внизу страницы
-    private By bottomOrderButton=By.cssSelector(".Button_Button__ra12g.Button_UltraBig__UU3Lp");
+    //локатор для кнопки "Заказать" внизу страницы
+    private final By bottomOrderButton=By.xpath(".//div[contains(@class,'Home')]/button[text() = 'Заказать']");
 
-    public void selectOrderbutton(String positionOrderbutton){
+    public void selectOrderButton(String positionOrderbutton){
         By orderButton=positionOrderbutton.equalsIgnoreCase("topButton")?topOrderButton:bottomOrderButton;
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(orderButton));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", button);
         button.click();
     }
-
-    //локаторы для аккордeона
+    //метод для локаторов аккордеона
     public void locatorFaq(int index, String expectedQuestionText,String expectedAnswerText) {
         // находим все вопросы
-        List<WebElement> questions = driver.findElements(By.cssSelector("div[id^='accordion__heading-']"));
+        List<WebElement> questions = driver.findElements(accordionLocatorQuestions);
 
         // скроллим до нужного вопроса
         WebElement question = wait.until(ExpectedConditions.elementToBeClickable(questions.get(index)));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", question);
-
         question.click();
         String actualQuestionText = question.getText();
         Assert.assertEquals(expectedQuestionText, actualQuestionText);
-        // кликаем по нему
-
 
         // находим все ответы
-        List<WebElement> answers = driver.findElements(By.cssSelector("div[id^='accordion__panel-']"));
+        List<WebElement> answers = driver.findElements(accordionLocatorAnswers);
 
         // ждём появления ответа и получаем текст
         WebElement answer = wait.until(ExpectedConditions.visibilityOf(answers.get(index)));
-
         String actualAnswerText = answer.getText();
+
         // проверяем совпадение текста
         Assert.assertEquals(expectedAnswerText, actualAnswerText);
     }
@@ -66,7 +64,7 @@ public class MainPage {
         this.driver=driver;
         this.wait=new WebDriverWait(driver,Duration.ofSeconds(EnvConfig.EXPLICITY_TIMEOUT));
     }
-    //метод нажать на кнопку
+    //метод нажать на кнопку Go
     public StatusPage clickOnGoButton() {
         new WebDriverWait(driver, Duration.ofSeconds(EnvConfig.EXPLICITY_TIMEOUT)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(goButton));
         driver.findElement(goButton).click();
@@ -84,7 +82,7 @@ public class MainPage {
     public void openMainPage() {
         driver.get(EnvConfig.BASE_URL);
     }
-    // убираем куку
+    //метод убираем куку
     public void clickCookie() {
         driver.findElement(cookieButton).click();
     }

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.tests;
+package ru.yandex.practicum.page;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.page.util.EnvConfig;
-
 import java.time.Duration;
 
 public class OrderFormPage {
@@ -18,27 +17,27 @@ public class OrderFormPage {
     //конструктор
     public OrderFormPage(WebDriver driver) {
         this.driver = driver;
-        this.wait =new WebDriverWait(driver, Duration.ofSeconds(EnvConfig.EXPLICITY_TIMEOUT)); ;
+        this.wait =new WebDriverWait(driver, Duration.ofSeconds(EnvConfig.EXPLICITY_TIMEOUT));
     }
 
     //переменные с локаторами
-    private By nameField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Имя']");
-    private By lastNameField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Фамилия']");
-    private By addressField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Адрес: куда привезти заказ']");
-    private By metroField=By.cssSelector(".select-search__input[placeholder='* Станция метро']");
-    private By phoneField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Телефон: на него позвонит курьер']");
-    private By nextButton=By.xpath("//button[text()='Далее']");
-    private By dateField=By.cssSelector("input[placeholder='* Когда привезти самокат']");;
-    private By rentalDropField=By.cssSelector(".Dropdown-arrow");
-    private By listRental=By.cssSelector(".Dropdown-menu");
-    private By getRental2Field=By.cssSelector(".Dropdown-option:nth-of-type(2)");
-    private By getRental3Field=By.cssSelector(".Dropdown-option:nth-of-type(3)");
-    private By colorBlackcheckbox=By.cssSelector(".Checkbox_Input__14A2w[id='black']");
-    private By colorGreycheckbox=By.cssSelector(".Checkbox_Input__14A2w[id='grey']");
-    private By commentField=By.cssSelector(".Input_Input__1iN_Z.Input_Responsible__1jDKN[placeholder='Комментарий для курьера']");
-    private By lastOrderButton=By.xpath("//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM' and text() = 'Заказать']");
-    private By yesButton = By.xpath("//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM' and text() = 'Да']");
-    private By orderBeenPlaced=By.xpath("//div[@class = 'Order_Text__2broi' and text() = 'Номер заказа: ']");
+    private final By nameField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Имя']");
+    private final By lastNameField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Фамилия']");
+    private final By addressField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Адрес: куда привезти заказ']");
+    private final By metroField=By.cssSelector(".select-search__input[placeholder='* Станция метро']");
+    private final By phoneField=By.cssSelector(".Input_Input__1iN_Z[placeholder='* Телефон: на него позвонит курьер']");
+    private final By nextButton=By.xpath("//button[text()='Далее']");
+    private final By dateField=By.cssSelector("input[placeholder='* Когда привезти самокат']");
+    private final By rentalDropField=By.cssSelector(".Dropdown-arrow");
+    private final By listRental=By.cssSelector(".Dropdown-menu");
+    private final By getRental2Field=By.cssSelector(".Dropdown-option:nth-of-type(2)");
+    private final By getRental3Field=By.cssSelector(".Dropdown-option:nth-of-type(3)");
+    private final By colorBlackCheckBox=By.cssSelector(".Checkbox_Input__14A2w[id='black']");
+    private final By colorGreyCheckBox=By.cssSelector(".Checkbox_Input__14A2w[id='grey']");
+    private final By commentField=By.cssSelector(".Input_Input__1iN_Z.Input_Responsible__1jDKN[placeholder='Комментарий для курьера']");
+    private final By lastOrderButton=By.xpath("//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM' and text() = 'Заказать']");
+    private final By yesButton = By.xpath("//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM' and text() = 'Да']");
+    private final By orderBeenPlaced=By.xpath("//div[@class = 'Order_Text__2broi' and text() = 'Номер заказа: ']");
 
 
 
@@ -100,7 +99,7 @@ public class OrderFormPage {
 
     //метод выбора чекбокса цвет самоката
     public void clickColorScooter(boolean colorScooter) {
-        By clickScooterColor = (colorScooter) ? colorBlackcheckbox : colorGreycheckbox;
+        By clickScooterColor = (colorScooter) ? colorBlackCheckBox : colorGreyCheckBox;
         driver.findElement(clickScooterColor).click();
     }
 

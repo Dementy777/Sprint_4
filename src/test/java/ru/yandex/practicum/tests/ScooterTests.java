@@ -1,25 +1,26 @@
 package ru.yandex.practicum.tests;
 
-import org.junit.*;
+import org.junit.Rule;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.practicum.page.MainPage;
 import ru.yandex.practicum.page.StatusPage;
 
-//обьявили класс
+//объявили класс
 public class ScooterTests {
-    // (обьявляем driver полем класса) заменили на инициализацию фабрики добавили анотацию правило
+    // (объявляем driver полем класса) заменили на инициализацию фабрики добавили аннотацию правило
     @Rule
-    public DriverFactory factory=new DriverFactory();
+    public DriverFactory factory = new DriverFactory();
 
     //создаем тест проверки номер заказа не найден
     @Test
     public void testNonExistingOrderNotFound() {
 
         //получаем драйвер через геттер с фабрики
-        WebDriver driver= factory.getDriver();
+        WebDriver driver = factory.getDriver();
 
-        //для работы пейджы ей нужен свой драйвер
-        var mainPage=new MainPage(driver);
+        //для работы "пейджы" ей нужен свой драйвер
+        var mainPage = new MainPage(driver);
 
 //открываем главную страницу
         mainPage.openMainPage();
@@ -31,7 +32,7 @@ public class ScooterTests {
         mainPage.enterOrderIn("321");
 
 // нажать на кнопку Go
-        StatusPage statusPage=mainPage.clickOnGoButton();
+        StatusPage statusPage = mainPage.clickOnGoButton();
 
 // проверка выпадающей картинки ошибки
         statusPage.checkErrorImage();

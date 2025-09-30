@@ -19,11 +19,11 @@ public class FAQListTest {
         this.expectedAnswerText = expectedAnswerText;
     }
 
-    // (обьявляем driver полем класса) заменили на инициализацию фабрики добавили анотацию правило
+    // (объявляем driver полем класса) заменили на инициализацию фабрики добавили аннотацию правило
     @Rule
-    public DriverFactory factory=new DriverFactory();
+    public DriverFactory factory = new DriverFactory();
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name="Тестовые данные {0}, Вопрос : {1}, Ответ : {2}")
     public static Object[][] data() {
         return new Object[][]{
                 {0, "Сколько это стоит? И как оплатить?", "Сутки — 400 рублей. Оплата курьеру — наличными или картой."},
@@ -33,23 +33,23 @@ public class FAQListTest {
                 {4, "Можно ли продлить заказ или вернуть самокат раньше?", "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010."},
                 {5, "Вы привозите зарядку вместе с самокатом?", "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится."},
                 {6, "Можно ли отменить заказ?", "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."},
-                {7, "Я жизу за МКАДом, привезёте?","Да, обязательно. Всем самокатов! И Москве, и Московской области."},
+                {7, "Я жизу за МКАДом, привезёте?", "Да, обязательно. Всем самокатов! И Москве, и Московской области."},
         };
     }
 
     //Тест проверки FAQList
     @Test
-    public void testFAQListVerification(){
+    public void testFAQListVerification() {
         //получаем драйвер через геттер с фабрики
-        WebDriver driver= factory.getDriver();
+        WebDriver driver = factory.getDriver();
 
         //для работы пейджы ей нужен свой драйвер
-        var mainPage=new MainPage(driver);
+        var mainPage = new MainPage(driver);
 
         //открываем главную страницу
         mainPage.openMainPage();
         mainPage.clickCookie();
 
-        mainPage.locatorFaq(index,expectedQuestionText,expectedAnswerText);
+        mainPage.locatorFaq(index, expectedQuestionText, expectedAnswerText);
     }
 }

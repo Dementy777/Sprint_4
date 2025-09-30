@@ -13,7 +13,6 @@ public class DriverFactory extends ExternalResource {
     }
     private WebDriver driver;
 
-
     public void initDriver(){
         if ("firefox".equals(System.getProperty("browser"))){
             startFireFox();
@@ -23,7 +22,7 @@ public class DriverFactory extends ExternalResource {
     }
 
     private void startChrome() {
-        //инициалицируем поле driver в методе starChrome в фабрике
+        //инициализируем поле driver в методе starChrome на фабрике
         driver = new ChromeDriver();
         //ожидание 15 сек
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(EnvConfig.IMPLICITY_TIMEOUT));
@@ -31,7 +30,7 @@ public class DriverFactory extends ExternalResource {
 
     }
     private void startFireFox() {
-        //инициалицируем поле driver в методе startFireFox в фабрике
+        //инициализируем поле driver в методе startFireFox на фабрике
         driver = new FirefoxDriver();
         //ожидание 15 сек
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(EnvConfig.IMPLICITY_TIMEOUT));
